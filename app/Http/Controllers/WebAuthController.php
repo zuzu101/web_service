@@ -127,11 +127,8 @@ class WebAuthController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'username' => 'required|string|max:50|unique:users,username,' . Auth::id() . ',user_id',
-            'email' => 'nullable|email|max:100|unique:users,email,' . Auth::id() . ',user_id',
             'phone_number' => 'nullable|string|max:20',
             'full_name' => 'nullable|string|max:100',
-            'address' => 'nullable|string',
             'current_password' => 'nullable|string',
             'password' => 'nullable|string|min:6|confirmed|required_with:current_password',
         ]);
@@ -142,7 +139,6 @@ class WebAuthController extends Controller
 
         $user = Auth::user();
 
-        // Update password if provided
         if ($request->filled('current_password')) {
             if (!Hash::check($request->current_password, $user->password)) {
                 return back()->withErrors(['current_password' => 'Current password is incorrect']);
@@ -150,12 +146,8 @@ class WebAuthController extends Controller
             $user->password = Hash::make($request->password);
         }
 
-        // Update profile fields
-        $user->username = $request->username;
-        $user->email = $request->email;
         $user->phone_number = $request->phone_number;
         $user->full_name = $request->full_name;
-        $user->address = $request->address;
         $user->save();
 
         return back()->with('success', 'Profile updated successfully!');

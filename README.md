@@ -1,6 +1,6 @@
 # Laravel Retail Service Management System
 
-A comprehensive web-based service management system built with Laravel 12.x for managing retail service operations, customer orders, and employee workflows.
+A comprehensive web-based service management system built with Laravel 11.x for managing retail service operations, customer orders, and employee workflows.
 
 ## 🚀 Features
 
@@ -28,7 +28,7 @@ A comprehensive web-based service management system built with Laravel 12.x for 
 
 ## 🛠 Tech Stack
 
-- **Backend**: Laravel 12.x (Latest)
+- **Backend**: Laravel 11.x (Stable LTS)
 - **Database**: MySQL
 - **Frontend**: Blade Templates, Vanilla JavaScript
 - **Authentication**: Laravel Session-based Auth
@@ -51,7 +51,7 @@ A comprehensive web-based service management system built with Laravel 12.x for 
 - PHP >= 8.2
 - Composer
 - MySQL
-- Laravel 12.x
+- Laravel 11.x
 
 ### Setup Steps
 
@@ -163,6 +163,6 @@ This project is open-sourced software licensed under the [MIT license](https://o
 
 ---
 
-Built with **Laravel 12.x** - The latest and most powerful version of Laravel framework.
+Built with **Laravel 11.x** - The stable and widely-adopted LTS version of Laravel framework.
 
 ⭐ **Star this repository if you find it helpful!**
