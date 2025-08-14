@@ -127,10 +127,13 @@ class WebAuthController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'phone_number' => 'nullable|string|max:20',
+            'username' => 'required|string|max:50|unique:users,username,' . Auth::id() . ',user_id',
             'full_name' => 'nullable|string|max:100',
+            'email' => 'nullable|email|max:100|unique:users,email,' . Auth::id() . ',user_id',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
             'current_password' => 'nullable|string',
-            'password' => 'nullable|string|min:6|confirmed|required_with:current_password',
+            'new_password' => 'nullable|string|min:6|confirmed|required_with:current_password',
         ]);
 
         if ($validator->fails()) {
@@ -138,17 +141,28 @@ class WebAuthController extends Controller
         }
 
         $user = Auth::user();
+        $updateData = [];
 
+        // Update password jika diisi
         if ($request->filled('current_password')) {
             if (!Hash::check($request->current_password, $user->password)) {
                 return back()->withErrors(['current_password' => 'Current password is incorrect']);
             }
-            $user->password = Hash::make($request->password);
+            
+            if ($request->filled('new_password')) {
+                $updateData['password'] = Hash::make($request->new_password);
+            }
         }
 
-        $user->phone_number = $request->phone_number;
-        $user->full_name = $request->full_name;
-        $user->save();
+        // Update profile data
+        $updateData['username'] = $request->username;
+        $updateData['full_name'] = $request->full_name;
+        $updateData['email'] = $request->email;
+        $updateData['phone'] = $request->phone;  
+        $updateData['address'] = $request->address;
+
+        // Update using User model update method
+        User::where('user_id', Auth::id())->update($updateData);
 
         return back()->with('success', 'Profile updated successfully!');
     }

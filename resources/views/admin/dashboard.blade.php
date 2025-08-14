@@ -7,6 +7,7 @@
 <div style="margin: 20px 0;">
     <a href="{{ route('admin.orders.index') }}" style="background: blue; color: white; padding: 10px; text-decoration: none;">Manage Orders</a>
     <a href="{{ route('admin.orders.create') }}" style="background: green; color: white; padding: 10px; text-decoration: none; margin-left: 10px;">Create New Order</a>
+    <a href="{{ route('admin.items.index') }}" style="background: purple; color: white; padding: 10px; text-decoration: none; margin-left: 10px;">Manage Items</a>
     
     <form method="POST" action="{{ route('logout') }}" style="display: inline; margin-left: 10px;">
         @csrf
